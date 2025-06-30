@@ -17,6 +17,7 @@
   wayland,
   kdePackages,
   python3,
+  libxml2,
 
   binaryNinjaEdition ? "personal",
   forceWayland ? false,
