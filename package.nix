@@ -64,10 +64,9 @@ stdenv.mkDerivation {
     libxkbcommon
     dbus
     wayland
-    libxml2
   ];
   pythonDeps = [ python3.pkgs.pip ];
-  appendRunpaths = [ "${lib.getLib python3}/lib" "${lib.getLib libxml2}/lib" ];
+  appendRunpaths = [ "${lib.getLib python3}/lib" ];
   qtWrapperArgs = lib.optionals forceWayland [
     "--set"
     "QT_QPA_PLATFORM"
@@ -85,6 +84,11 @@ stdenv.mkDerivation {
       categories = [ "Development" ];
     })
   ];
+
+  preFixup = ''
+    mkdir -p "$out/lib"
+    ln -s "${lib.getLib libxml2}/lib/libxml2.so" "$out/lib/libxml2.so.2"
+  '';
 
   installPhase = ''
     runHook preInstall
