@@ -63,6 +63,7 @@ stdenv.mkDerivation {
     libxkbcommon
     dbus
     wayland
+    libxml2
   ];
   pythonDeps = [ python3.pkgs.pip ];
   appendRunpaths = [ "${lib.getLib python3}/lib" ];
